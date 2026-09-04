@@ -1,4 +1,3 @@
-import { prisma } from '../config/db';
 
 export const checkAndTriggerBudgetAlerts = async (userId: string, category: string, date: Date) => {
   try {
