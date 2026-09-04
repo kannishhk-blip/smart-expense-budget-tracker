@@ -1,8 +1,8 @@
 # Smart Expense & Budget Tracker
 
-Tagline: **“Track your money. Understand your spending. Reach your goals.”**
+**“Track your money. Understand your spending. Reach your goals.”**
 
-A production-quality, full-stack personal finance web application built to help college students, employees, freelancers, and families track income/expenses, monitor monthly category budgets, manage savings goals, analyze spending habits using interactive charts, receive budget overflow alerts, and export financial reports.
+A production-quality, full-stack personal finance web application built to help college students, employees, freelancers, and families track income and expenses, monitor monthly category budgets, manage savings goals, analyze spending habits using interactive charts, receive budget overflow alerts, and export financial reports.
 
 ---
 
@@ -14,12 +14,12 @@ A production-quality, full-stack personal finance web application built to help 
 4. [Key Features](#key-features)
 5. [Technology Stack](#technology-stack)
 6. [System Architecture](#system-architecture)
-7. [Database Schema (Prisma)](#database-schema-prisma)
+7. [Database Schema](#database-schema)
 8. [Project Structure](#project-structure)
 9. [Installation & Setup](#installation--setup)
 10. [Environment Variables](#environment-variables)
 11. [Database Setup & Seeding](#database-setup--seeding)
-12. [Running Frontend & Backend](#running-frontend--backend)
+12. [Running the Application](#running-the-application)
 13. [API Documentation](#api-documentation)
 14. [Testing & Verification](#testing--verification)
 15. [Deployment Guide](#deployment-guide)
@@ -29,138 +29,228 @@ A production-quality, full-stack personal finance web application built to help 
 
 ## 1. Project Overview
 
-People often spend money every day without knowing exactly where their money goes. Without systematic expense logging and budget monitoring, users risk overspending and struggle to achieve savings targets. **Smart Expense & Budget Tracker** provides a central financial dashboard with real-time analytics, overspending warnings, target savings progress, and downloadable CSV statements.
+People often spend money every day without knowing exactly where their money goes. Without systematic expense logging and budget monitoring, users risk overspending and struggle to achieve savings targets.
+
+**Smart Expense & Budget Tracker** provides a centralized financial dashboard with real-time analytics, overspending warnings, savings goal progress, budget monitoring, and downloadable CSV transaction reports.
 
 ---
 
 ## 2. Problem Statement
 
-* **Lack of Visibility**: Users are unaware of daily cumulative small expenses (swiggy, cabs, shopping).
-* **Budget Exceedance**: Difficulty maintaining strict category limits throughout the month.
-* **Complex Tools**: Existing banking apps lack unified category analytics or customizable goals.
-* **Saving Obstacles**: Inability to visualize savings progress towards major milestones.
+* **Lack of Visibility:** Users may be unaware of cumulative daily expenses such as food delivery, transportation, and shopping.
+* **Budget Exceedance:** Difficulty maintaining category-based spending limits throughout the month.
+* **Complex Tools:** Many existing financial tools do not provide simple, unified category analytics and customizable savings goals.
+* **Saving Obstacles:** Difficulty visualizing progress toward important savings milestones.
 
 ---
 
 ## 3. Proposed Solution
 
 The application provides:
-* Secure JWT Authentication with session management.
-* Interactive Recharts financial analytics (Pie charts, Monthly income vs expenses trends).
-* Complete Transaction CRUD with real-time search, filters (Type, Category, Date range, Amount min/max), and multi-field sorting.
-* Monthly Category Budgets with dynamic warning badges at 80% usage and alert banners upon budget overflow.
-* Savings Goals tracker with target amounts, progress bars, and deposit modals.
-* Analytical Financial Insights (Top spending category, highest expense, average daily spending, MoM comparison).
+
+* Secure JWT authentication with session management.
+* Interactive financial analytics using Recharts, including pie charts and monthly income-versus-expense trends.
+* Complete transaction CRUD with search, filters, date ranges, amount ranges, and multi-field sorting.
+* Monthly category budgets with dynamic warning badges at 80% usage and alert notifications when budgets are exceeded.
+* Savings goals with target amounts, progress tracking, and deposit functionality.
+* Financial insights including top spending category, highest expense, average daily spending, and month-over-month comparisons.
 * Downloadable CSV transaction exports.
-* Persistent Dark Mode & Customizable Currency (INR ₹ default, USD, EUR, GBP).
+* Persistent dark mode and customizable currency support, including INR ₹, USD, EUR, and GBP.
 
 ---
 
 ## 4. Key Features
 
-* **Landing Page**: Modern hero section, features list, how-it-works overview, and CTA buttons.
-* **Auth**: Registration, Login, Logout, protected routes, bcrypt password hashing, JWT authorization headers, quick demo credentials fill (`demo@example.com` / `Demo@12345`).
-* **Dashboard**: Income/Expenses/Balance/Savings summary cards, Recharts visualizations, recent transactions.
-* **Transactions Page**: Full table view + responsive mobile card layout with instant search, multi-filters, sorting, and CSV exporter.
-* **Budgets Page**: Monthly category budget targets, progress bars (Green < 75%, Yellow 75-99%, Red >= 100%), and alert indicators.
-* **Savings Goals Page**: Target goal cards, progress trackers, deposit funds modal, and goal completion badges.
-* **Financial Insights**: Analytical calculations for average daily spending, MoM % shifts, top spending categories.
-* **Monthly Reports**: Selectable month/year executive summaries with key performance indicators.
-* **In-App Notifications**: Unread counter badge, alert popover, mark-as-read, clear notifications.
-* **Profile & Settings**: Avatar selector, profile updates, change password, dark mode toggle, currency switcher.
+### 🏠 Landing Page
+
+* Modern hero section
+* Features overview
+* How-it-works section
+* Call-to-action buttons
+
+### 🔐 Authentication
+
+* User registration and login
+* Logout functionality
+* Protected routes
+* Bcrypt password hashing
+* JWT-based authorization
+* Quick demo credentials fill
+
+### 📊 Dashboard
+
+* Income summary
+* Expense summary
+* Balance overview
+* Savings summary
+* Interactive Recharts visualizations
+* Recent transactions
+
+### 💳 Transactions
+
+* Create, read, update, and delete transactions
+* Income and expense tracking
+* Instant search
+* Type and category filters
+* Date-range filtering
+* Minimum and maximum amount filtering
+* Multi-field sorting
+* Responsive transaction table
+* Mobile-friendly card layout
+* CSV transaction export
+
+### 💰 Budgets
+
+* Monthly category budgets
+* Budget progress bars
+* Warning indicators
+* Budget overflow alerts
+* Budget usage monitoring
+
+### 🎯 Savings Goals
+
+* Create savings goals
+* Target amount tracking
+* Current savings progress
+* Deposit funds
+* Progress bars
+* Goal completion badges
+
+### 📈 Financial Insights
+
+* Top spending category
+* Highest expense
+* Average daily spending
+* Month-over-month spending comparison
+* Spending analysis
+
+### 📅 Monthly Reports
+
+* Month and year selection
+* Financial performance summaries
+* Key performance indicators
+
+### 🔔 Notifications
+
+* Unread notification counter
+* Budget warning notifications
+* Budget exceeded notifications
+* Goal achievement notifications
+* Mark notifications as read
+* Clear notifications
+
+### ⚙️ Profile & Settings
+
+* Profile management
+* Avatar selection
+* Password change
+* Dark mode
+* Currency selection
+* Notification preferences
+* Budget alert preferences
+* Monthly report preferences
 
 ---
 
 ## 5. Technology Stack
 
 ### Frontend
-* **Core**: React 18 + TypeScript + Vite
-* **Styling**: Tailwind CSS
-* **Icons**: Lucide React
-* **Data Visualization**: Recharts
-* **Routing**: React Router v6
-* **Notifications**: React Hot Toast
+
+* **React 18**
+* **TypeScript**
+* **Vite**
+* **Tailwind CSS**
+* **Lucide React**
+* **Recharts**
+* **React Router v6**
+* **React Hot Toast**
 
 ### Backend
-* **Runtime**: Node.js + Express.js + TypeScript
-* **ORM**: Prisma ORM
-* **Auth**: JWT (jsonwebtoken) + Bcryptjs
-* **Validation & Utilities**: Zod / Express Middleware
+
+* **Node.js**
+* **Express.js**
+* **TypeScript**
+* **Prisma ORM**
+* **JWT (jsonwebtoken)**
+* **Bcryptjs**
+* **Zod**
+* **Express Middleware**
 
 ### Database
-* **Database Engine**: PostgreSQL / SQLite (configured via Prisma schema)
+
+* **SQLite** for local development
+* **PostgreSQL** supported through Prisma configuration
 
 ---
 
 ## 6. System Architecture
 
-```
-                     ┌──────────────────────────────────────────┐
-                     │          React + Vite + TS UI            │
-                     │  (Tailwind CSS, Lucide, Recharts, Router) │
-                     └────────────────────┬─────────────────────┘
-                                          │ REST API (JSON)
-                                          ▼
-                     ┌──────────────────────────────────────────┐
-                     │       Node.js + Express + TS Backend     │
-                     │  (JWT Auth, bcryptjs, Zod/Express-Val)   │
-                     └────────────────────┬─────────────────────┘
-                                          │ Prisma ORM
-                                          ▼
-                     ┌──────────────────────────────────────────┐
-                     │     PostgreSQL / SQLite Database          │
-                     └──────────────────────────────────────────┘
+```text
+┌───────────────────────────────────────────────┐
+│              React + Vite Frontend            │
+│     TypeScript • Tailwind • Recharts         │
+│       React Router • Lucide • Toast           │
+└───────────────────────┬───────────────────────┘
+                        │
+                        │ REST API (JSON)
+                        ▼
+┌───────────────────────────────────────────────┐
+│          Node.js + Express Backend            │
+│      TypeScript • JWT • Bcryptjs • Zod        │
+└───────────────────────┬───────────────────────┘
+                        │
+                        │ Prisma ORM
+                        ▼
+┌───────────────────────────────────────────────┐
+│             Database Layer                    │
+│             SQLite / PostgreSQL               │
+└───────────────────────────────────────────────┘
 ```
 
 ---
 
-## 7. Database Schema (Prisma)
+## 7. Database Schema
 
-* **User**: `id`, `name`, `email`, `passwordHash`, `profileImage`, `createdAt`, `updatedAt`
-* **Transaction**: `id`, `userId`, `type` (INCOME/EXPENSE), `amount`, `category`, `description`, `paymentMethod`, `transactionDate`, `notes`, `receiptUrl`
-* **Budget**: `id`, `userId`, `category`, `amount`, `month`, `year`
-* **SavingsGoal**: `id`, `userId`, `name`, `targetAmount`, `currentAmount`, `targetDate`, `description`, `status` (IN_PROGRESS/COMPLETED)
-* **Notification**: `id`, `userId`, `type` (BUDGET_WARNING/BUDGET_EXCEEDED/GOAL_ACHIEVED/INFO), `message`, `isRead`
-* **UserSettings**: `id`, `userId`, `currency`, `darkMode`, `notificationsEnabled`, `budgetAlertsEnabled`, `monthlyReportsEnabled`
+The application uses Prisma ORM with the following main models:
+
+* **User:** `id`, `name`, `email`, `passwordHash`, `profileImage`, `createdAt`, `updatedAt`
+* **Transaction:** `id`, `userId`, `type`, `amount`, `category`, `description`, `paymentMethod`, `transactionDate`, `notes`, `receiptUrl`
+* **Budget:** `id`, `userId`, `category`, `amount`, `month`, `year`
+* **SavingsGoal:** `id`, `userId`, `name`, `targetAmount`, `currentAmount`, `targetDate`, `description`, `status`
+* **Notification:** `id`, `userId`, `type`, `message`, `isRead`
+* **UserSettings:** `id`, `userId`, `currency`, `darkMode`, `notificationsEnabled`, `budgetAlertsEnabled`, `monthlyReportsEnabled`
 
 ---
 
 ## 8. Project Structure
 
-```
+```text
 expense/
-├── client/                      # React + Vite Frontend
-│   ├── public/                  # Favicon & Static assets
-│   ├── src/
-│   │   ├── components/          # Reusable Navbar, Sidebar, Modals, Cards, Charts
-│   │   ├── context/             # AuthContext, ThemeContext, CurrencyContext
-│   │   ├── layouts/             # AppLayout
-│   │   ├── pages/               # Landing, Login, Register, Dashboard, Transactions, Budgets, Savings, Insights, Reports, Profile, Settings
-│   │   ├── services/            # api.ts (Fetch wrapper)
-│   │   ├── types/               # TypeScript interfaces
-│   │   ├── utils/               # Formatters & CSV exporter
-│   │   ├── App.tsx
-│   │   └── main.tsx
-│   ├── package.json
-│   ├── tailwind.config.js
-│   └── vite.config.ts
+├── prisma/
+│   └── ...                       # Prisma database configuration
 │
-├── server/                      # Express + TypeScript Backend
-│   ├── prisma/
-│   │   ├── schema.prisma        # Database models
-│   │   └── seed.ts              # Demo seed data script
-│   ├── src/
-│   │   ├── config/              # env.ts, db.ts
-│   │   ├── controllers/         # Auth, Transaction, Budget, Savings, Dashboard, Report, Notification, Profile, Settings
-│   │   ├── middleware/          # authMiddleware, errorHandler
-│   │   ├── routes/              # Express API routers
-│   │   ├── services/            # Notification & Budget alert service
-│   │   └── app.ts
-│   ├── package.json
-│   └── tsconfig.json
+├── public/                       # Static assets and favicon
 │
+├── src/
+│   ├── components/               # Reusable UI components
+│   ├── context/                  # Authentication, theme and currency contexts
+│   ├── layouts/                  # Application layouts
+│   ├── pages/                    # Application pages
+│   ├── services/                 # API and service functions
+│   ├── types/                    # TypeScript interfaces and types
+│   ├── utils/                    # Utility functions and CSV exporter
+│   ├── App.tsx
+│   └── main.tsx
+│
+├── PROJECT_DOCUMENTATION.md
 ├── README.md
-└── PROJECT_DOCUMENTATION.md
+├── index.html
+├── package.json
+├── package-lock.json
+├── postcss.config.js
+├── tailwind.config.js
+├── tsconfig.json
+└── vite.config.ts
 ```
 
 ---
@@ -168,25 +258,20 @@ expense/
 ## 9. Installation & Setup
 
 ### Prerequisites
-* **Node.js**: v18.x or higher
-* **npm**: v9.x or higher
 
-### Step 1: Clone or Open Project Directory
+* **Node.js:** v18.x or higher
+* **npm:** v9.x or higher
+
+### Step 1: Clone the Repository
+
 ```bash
-cd d:/Twillo/expense
+git clone https://github.com/kannishhk-blip/smart-expense-budget-tracker.git
+cd smart-expense-budget-tracker
 ```
 
 ### Step 2: Install Dependencies
 
-**Server:**
 ```bash
-cd server
-npm install
-```
-
-**Client:**
-```bash
-cd ../client
 npm install
 ```
 
@@ -194,117 +279,167 @@ npm install
 
 ## 10. Environment Variables
 
-Create `.env` inside `server/`:
+Create a `.env` file according to the application's configuration.
+
+Example:
 
 ```env
 PORT=5000
-DATABASE_URL="file:./dev.db" # Or postgresql://user:password@localhost:5432/expensedb
-JWT_SECRET="smart_expense_tracker_secret_key_2026"
+DATABASE_URL="file:./dev.db"
+JWT_SECRET="your_secure_jwt_secret_here"
 NODE_ENV="development"
 ```
+
+> **Important:** Never commit real passwords, API keys, database credentials, or JWT secrets to GitHub.
 
 ---
 
 ## 11. Database Setup & Seeding
 
-Inside `server/`:
+If Prisma is configured for the project, run:
 
 ```bash
-# Push schema & generate Prisma client
 npx prisma db push
 npx prisma generate
+```
 
-# Seed database with demo user & realistic transaction history
+To seed the database with demo data:
+
+```bash
 npx ts-node prisma/seed.ts
 ```
 
 ### Demo Credentials
-* **Email**: `demo@example.com`
-* **Password**: `Demo@12345`
+
+**Email:** `demo@example.com`
+**Password:** `Demo@12345`
+
+> The demo credentials should only be used for a dedicated demo account and should not contain sensitive personal information.
 
 ---
 
-## 12. Running Frontend & Backend
+## 12. Running the Application
 
-### Start Backend API Server
+Start the development server using:
+
 ```bash
-cd server
 npm run dev
-# Server running at http://localhost:5000
 ```
 
-### Start Frontend Client Server
-```bash
-cd client
-npm run dev
-# Client running at http://localhost:5173
+The application will normally be available at:
+
+```text
+http://localhost:5173
 ```
+
+If the backend runs as a separate service, configure and start it according to the backend scripts and environment variables in the project.
 
 ---
 
 ## 13. API Documentation
 
 ### Authentication
-* `POST /api/auth/register` - Create user account.
-* `POST /api/auth/login` - Authenticate user & return JWT.
-* `POST /api/auth/logout` - Clear session.
-* `GET /api/auth/me` - Fetch authenticated user profile.
+
+* `POST /api/auth/register` - Create a user account
+* `POST /api/auth/login` - Authenticate a user and return JWT
+* `POST /api/auth/logout` - Log out the current user
+* `GET /api/auth/me` - Fetch authenticated user profile
 
 ### Transactions
-* `GET /api/transactions` - Fetch transactions (search, filter, sort, paginate).
-* `POST /api/transactions` - Create income/expense transaction.
-* `GET /api/transactions/:id` - Fetch transaction details.
-* `PUT /api/transactions/:id` - Update transaction.
-* `DELETE /api/transactions/:id` - Delete transaction.
-* `GET /api/transactions/export` - Export user transactions CSV.
+
+* `GET /api/transactions` - Fetch transactions with search, filters, sorting and pagination
+* `POST /api/transactions` - Create an income or expense transaction
+* `GET /api/transactions/:id` - Fetch transaction details
+* `PUT /api/transactions/:id` - Update a transaction
+* `DELETE /api/transactions/:id` - Delete a transaction
+* `GET /api/transactions/export` - Export transactions as CSV
 
 ### Budgets & Savings
-* `GET /api/budgets` - Fetch category budgets & alert statuses.
-* `POST /api/budgets` - Upsert category budget.
-* `DELETE /api/budgets/:id` - Delete budget.
-* `GET /api/savings-goals` - List savings goals.
-* `POST /api/savings-goals` - Create goal.
-* `POST /api/savings-goals/:id/add-funds` - Deposit funds into goal.
+
+* `GET /api/budgets` - Fetch category budgets and alert statuses
+* `POST /api/budgets` - Create or update a category budget
+* `DELETE /api/budgets/:id` - Delete a budget
+* `GET /api/savings-goals` - List savings goals
+* `POST /api/savings-goals` - Create a savings goal
+* `POST /api/savings-goals/:id/add-funds` - Add funds to a savings goal
 
 ### Analytics & Reports
-* `GET /api/dashboard/summary` - Summary cards data.
-* `GET /api/dashboard/category-breakdown` - Category expense distribution.
-* `GET /api/dashboard/monthly-trends` - Income vs Expense monthly trends.
-* `GET /api/insights` - Calculated financial analytics.
-* `GET /api/reports/monthly` - Detailed monthly performance report.
+
+* `GET /api/dashboard/summary` - Fetch dashboard summary data
+* `GET /api/dashboard/category-breakdown` - Fetch category expense distribution
+* `GET /api/dashboard/monthly-trends` - Fetch monthly income and expense trends
+* `GET /api/insights` - Fetch calculated financial insights
+* `GET /api/reports/monthly` - Fetch detailed monthly performance reports
 
 ---
 
 ## 14. Testing & Verification
 
-1. **TypeScript Typecheck**:
-   ```bash
-   cd server && npx tsc --noEmit
-   cd ../client && npx tsc --noEmit
-   ```
-2. **Frontend Production Build Check**:
-   ```bash
-   cd client && npm run build
-   ```
-3. **End-to-End User Flow Verification**:
-   * Login with demo account (`demo@example.com` / `Demo@12345`).
-   * Add new Income and Expense. Verify dashboard totals & pie chart auto-update.
-   * Exceed a category budget (e.g. Food) to trigger budget alert notification.
-   * Deposit money into a savings goal to complete goal milestone.
-   * Export transactions CSV and open in Excel.
+### TypeScript Type Checking
+
+```bash
+npx tsc --noEmit
+```
+
+### Production Build
+
+```bash
+npm run build
+```
+
+### End-to-End Verification
+
+Test the following user flows:
+
+* Register and log in with a user account.
+* Add income and expense transactions.
+* Verify dashboard totals and charts update correctly.
+* Search and filter transactions.
+* Create a category budget.
+* Exceed a budget and verify the warning/notification behavior.
+* Create a savings goal.
+* Deposit funds into a savings goal.
+* Verify goal progress and completion status.
+* Export transactions as CSV and open the file in Excel.
 
 ---
 
 ## 15. Deployment Guide
 
-* **Backend**: Deploy Node/Express server on Render / Railway / Heroku. Configure environment variable `DATABASE_URL` pointing to hosted PostgreSQL.
-* **Frontend**: Deploy React Vite build on Vercel / Netlify. Configure API base URL.
+### Frontend
+
+The React/Vite application can be deployed using platforms such as:
+
+* Vercel
+* Netlify
+
+Configure the required API base URL and environment variables for the production environment.
+
+### Backend
+
+The Node.js/Express backend can be deployed using platforms such as:
+
+* Render
+* Railway
+* Heroku
+
+For production deployments, configure the appropriate hosted PostgreSQL database and secure environment variables.
 
 ---
 
 ## 16. Future Improvements
 
-* Bank account aggregation & Open Banking API integration.
-* AI-driven spending recommendations & recurring bill detection.
-* Receipt OCR scanning with automatic transaction text extraction.
-* Multi-user shared family budgets.
+* Bank account aggregation and Open Banking API integration
+* AI-driven spending recommendations
+* Recurring bill detection
+* Receipt OCR scanning with automatic transaction extraction
+* Multi-user shared family budgets
+* Advanced financial forecasting
+* More detailed spending analytics
+* Mobile application support
+
+---
+
+## License
+
+This project is intended for educational and portfolio purposes.
